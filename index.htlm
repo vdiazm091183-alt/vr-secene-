@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My First VR Scene</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Sky background -->
+      <a-sky color="#001d3d"></a-sky>
+
+      <!-- Ground -->
+      <a-plane rotation="-90 0 0" width="30" height="30" color="#0a9396"></a-plane>
+
+      <!-- A glowing box -->
+      <a-box position="0 1.5 -3" rotation="0 45 0" color="#ffb703" 
+             animation="property: rotation; to: 0 405 0; loop: true; dur: 5000">
+      </a-box>
+
+      <!-- A floating sphere -->
+      <a-sphere position="2 2 -5" radius="1.2" color="#90e0ef" 
+                animation="property: position; dir: alternate; to: 2 3 -5; loop: true; dur: 3000">
+      </a-sphere>
+
+      <!-- A red cylinder -->
+      <a-cylinder position="-2 1 -4" radius="0.8" height="2" color="#e63946"></a-cylinder>
+
+      <!-- Camera -->
+      <a-entity camera look-controls wasd-controls position="0 1.6 0"></a-entity>
+    </a-scene>
+  </body>
+</html>
