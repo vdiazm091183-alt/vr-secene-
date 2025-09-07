@@ -2,39 +2,52 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>VR Scene with GLB Model</title>
+    <title>Virtual Art Exhibition</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- A-Frame library -->
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
   </head>
   <body>
     <a-scene>
-      <!-- Load assets -->
+      <!-- Assets -->
       <a-assets>
-        <!-- Replace dragon.glb with the name of your file -->
-        <a-asset-item id="myModel" src="undaunted.glb"></a-asset-item>
+        <a-asset-item id="sculpture" src="sculpture.glb"></a-asset-item>
+        <a-asset-item id="painting" src="painting.glb"></a-asset-item>
+        <audio id="bg-music" src="background.mp3"></audio>
       </a-assets>
 
-      <!-- Background sky -->
-      <a-sky color="#001d3d"></a-sky>
+      <!-- Background music -->
+      <a-sound src="#bg-music" autoplay="true" loop="true" position="0 2 0"></a-sound>
 
-      <!-- Ground -->
-      <a-plane rotation="-90 0 0" width="30" height="30" color="#0a9396"></a-plane>
+      <!-- Exhibition floor -->
+      <a-plane rotation="-90 0 0" width="20" height="20" color="#e5e5e5"></a-plane>
 
-      <!-- Your 3D model -->
-      <a-entity gltf-model="#myModel"
+      <!-- Walls -->
+      <a-box position="0 2 -10" depth="0.5" height="4" width="20" color="#cccccc"></a-box>
+      <a-box position="0 2 10" depth="0.5" height="4" width="20" color="#cccccc"></a-box>
+      <a-box position="-10 2 0" depth="20" height="4" width="0.5" color="#cccccc"></a-box>
+      <a-box position="10 2 0" depth="20" height="4" width="0.5" color="#cccccc"></a-box>
+
+      <!-- Art pieces -->
+      <a-entity gltf-model="#sculpture"
                 position="0 0 -5"
                 scale="2 2 2"
-                rotation="0 45 0">
+                look-at="[camera]">
       </a-entity>
 
-      <!-- A spinning cube (still there for reference) -->
-      <a-box position="3 1.5 -3" rotation="0 45 0" color="#ffb703"
-             animation="property: rotation; to: 0 405 0; loop: true; dur: 5000">
-      </a-box>
+      <a-entity gltf-model="#painting"
+                position="4 1.5 -5"
+                scale="2 2 2"
+                rotation="0 0 0"
+                event-set__mouseenter="scale: 2.5 2.5 2.5"
+                event-set__mouseleave="scale: 2 2 2">
+      </a-entity>
 
-      <!-- Camera (your view) -->
-      <a-entity camera look-controls wasd-controls position="0 1.6 0"></a-entity>
+      <!-- Camera + gaze cursor -->
+      <a-entity camera look-controls position="0 1.6 0">
+        <a-cursor></a-cursor>
+      </a-entity>
     </a-scene>
   </body>
 </html>
